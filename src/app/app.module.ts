@@ -1,18 +1,35 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {PokemonCrudComponent} from './pokemon-crud/pokemon-crud.component';
+import {InMemoryWebApiModule} from 'angular-in-memory-web-api'
+import {PokemonDataService} from "./data/PokemonDataService";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import { PokemonListComponent } from './pokeapi/pokemon-list/pokemon-list.component';
+import { PokemonDetailComponent } from './pokeapi/pokemon-detail/pokemon-detail.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PokemonCrudComponent,
+    PokemonListComponent,
+    PokemonDetailComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    AppRoutingModule,
+    InMemoryWebApiModule.forRoot(PokemonDataService, {
+      passThruUnknownUrl: true
+    }),
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
